@@ -15,15 +15,14 @@ const Homepage = (props) => {
                         <p>Welcome to my NFT collection</p>
                         <span>You can get it for the best price</span>
                         <img className={style.nftImage} src={nftImg} alt="" />
-                        {/* <div className={style.line}></div> */}
-                        <button>Buy now</button>
+                        <button >Buy now</button>
                     </div> 
                 :
                     <div className={style.banner}>
                         <p>Discount every friday</p>
                         <span>from 5:00 PM to 6:00 PM</span>
                         <img src={discountImg} alt="" />
-                        <button>Buy now</button> 
+                        <button href="#products">Buy now</button> 
                     </div>
             }
             <div className={style.button}>

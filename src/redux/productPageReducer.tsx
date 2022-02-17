@@ -1,4 +1,19 @@
-const initialState = {
+type stateCreator = {
+    nft: nftCreator | []
+    isFetching: boolean
+};
+
+export type nftCreator = {
+    id: number
+    imageUrl: string
+    name: string
+    amount: number
+    size: {} | null
+    price: number
+    comments: []
+}
+
+const initialState: stateCreator = {
     nft: [],
     isFetching: false
 }
@@ -36,4 +51,4 @@ export const setNftDataThunk = () => (dispatch) => {
             dispatch(setNftData(data))
             dispatch(isFetchingCreactor(false))
         })
-}
+} 

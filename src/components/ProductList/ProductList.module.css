@@ -63,11 +63,16 @@
     border: none;
     font-size: 18px;
     color: rgb(114, 113, 113);
+    cursor: pointer;
 }
 
 .nav div div button:hover {
     color: #3a89ff;
     text-decoration: underline #3a89ff;
+}
+
+.allBlocks {
+    display: flex;
 }
 
 @media screen and (min-width: 1641px) {

@@ -9,6 +9,7 @@
 .header p {
     margin-left: 20px;
     color: #3a89ff;
+    font-weight: bold;
 }
 
 .navigation a {
