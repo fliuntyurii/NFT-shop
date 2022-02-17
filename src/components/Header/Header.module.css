@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3px;
+    background-color: rgb(250, 250, 250);
+}
+
+.header p {
+    margin-left: 20px;
+    color: #3a89ff;
+}
+
+.navigation a {
+    margin: auto 10px;
+    text-decoration: none;
+    color: rgb(114, 113, 113);
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
+.cart:hover {
+    text-decoration: none !important;
+}
+
+.cart {
+    padding-right: 20px;
+}
