@@ -1,8 +1,8 @@
 import React from "react";
+import Preloader from "../Preloader/Preloader";
 import style from "./ProductList.module.css"
 
 const ProductList = (props) => { 
-
     return (
         <div className={style.block}>
             <a name='products'></a>            
@@ -16,7 +16,7 @@ const ProductList = (props) => {
                     </div>
                 </div>
             </div>
-
+            <Preloader isFetching={props.isFetching} />
             <div className={style.nftPage} ref={props.myRef}>                
                 {
                     props.nft.map(nft => 

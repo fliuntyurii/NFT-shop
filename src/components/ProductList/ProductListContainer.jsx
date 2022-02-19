@@ -59,6 +59,7 @@ class ProductListContainer extends React.Component {
                 sortToLow={this.sortToLow} 
                 sortToHigh={this.sortToHigh} myRef={this.myRef} 
                 nft={this.props.nft} 
+                isFetching={this.props.isFetching}
             />
         )
     }
@@ -67,7 +68,7 @@ class ProductListContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         nft: state.productPage.nft,
-        productPage: state.productPage
+        isFetching: state.productPage.isFetching
     }
 }
 
