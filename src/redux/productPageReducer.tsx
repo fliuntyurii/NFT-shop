@@ -1,6 +1,9 @@
+const baseUrl = 'https://my-json-server.typicode.com/fliuntyurii/NFT-shop/Products'
+
 type stateCreator = {
     nft: nftCreator | []
     isFetching: boolean
+    isModalWindow: boolean
 };
 
 export type nftCreator = {
@@ -15,7 +18,8 @@ export type nftCreator = {
 
 const initialState: stateCreator = {
     nft: [],
-    isFetching: false
+    isFetching: false,
+    isModalWindow: false
 }
 
 const productPageReducer = (state = initialState, action) => {
@@ -33,6 +37,13 @@ const productPageReducer = (state = initialState, action) => {
         }
     }
 
+    if (action.type === 'MODAL-WINDOW') {
+        return {
+            ...state,
+            isModalWindow: action.isModalWindow
+        }
+    }
+
     return state;
 }
 
@@ -40,12 +51,14 @@ export const setNftData = (nft) => ({type: 'SET-NFT-DATA', nft})
 
 export const isFetchingCreactor = (isFetching) => ({type: 'FETCHING-SWITCHER', isFetching});
 
+export const toggleModalWindow = (isModalWindow) => ({type: "MODAL-WINDOW", isModalWindow})
+
 export default productPageReducer;
 
 export const setNftDataThunk = () => (dispatch) => {
     dispatch(isFetchingCreactor(true));
 
-    fetch('http://localhost:8000/Products', {method: 'GET'})
+    fetch(baseUrl, {method: 'GET'})
         .then(response => response.json())
         .then(data => {
             dispatch(setNftData(data))

@@ -1,75 +1,80 @@
 import ProductList from "./ProductList";
 import { connect } from 'react-redux';
-import { setNftDataThunk } from '../../redux/productPageReducer.tsx';
-import React from "react";
+import { setNftDataThunk, toggleModalWindow } from '../../redux/productPageReducer.tsx';
+import React, { useEffect, useRef } from "react";
 
-class ProductListContainer extends React.Component {
+const ProductListContainer = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.myRef = React.createRef();
+    const myRef = useRef();
+
+    useEffect(() => {
+        props.setNftDataThunk();
+    }, [])
+
+    const openModalWindow = (ev) => {
+        props.isModalWindow ? props.toggleModalWindow(false) : props.toggleModalWindow(true);
+        const getId = ev.target;
+        return finalId = getId.getAttribute('id');
     }
 
-    componentDidMount() {
-        this.props.setNftDataThunk()
+
+    const insertAfter = (elem, refElem) => {
+        return myRef.current.insertBefore(elem, refElem.nextSibling)
     }
 
-
-    insertAfter = (elem, refElem) => {
-        return this.myRef.current.insertBefore(elem, refElem.nextSibling)
-    }
-
-    sortToLow = () => {
-        for (let i = 0; i < this.myRef.current.children.length; i++) {
-            for (let n = i; n < this.myRef.current.children.length; n++) {
-                if (+this.myRef.current.children[i].getAttribute('data-price') > +this.myRef.current.children[n].getAttribute('data-price')) {
-                    let replaceNode = this.myRef.current.replaceChild(this.myRef.current.children[n], this.myRef.current.children[i]);
-                    this.insertAfter(replaceNode, this.myRef.current.children[i]);
+    const sortToLow = () => {
+        for (let i = 0; i < myRef.current.children.length; i++) {
+            for (let n = i; n < myRef.current.children.length; n++) {
+                if (+myRef.current.children[i].getAttribute('data-price') > +myRef.current.children[n].getAttribute('data-price')) {
+                    let replaceNode = myRef.current.replaceChild(myRef.current.children[n], myRef.current.children[i]);
+                    insertAfter(replaceNode, myRef.current.children[i]);
                 }
             }
         }
     }
 
-    sortToHigh = () => {
-        for (let i = 0; i < this.myRef.current.children.length; i++) {
-            for (let n = i; n < this.myRef.current.children.length; n++) {
-                if (+this.myRef.current.children[i].getAttribute('data-price') < +this.myRef.current.children[n].getAttribute('data-price')) {
-                    let replaceNode = this.myRef.current.replaceChild(this.myRef.current.children[n], this.myRef.current.children[i]);
-                    this.insertAfter(replaceNode, this.myRef.current.children[i]);
+    const sortToHigh = () => {
+        for (let i = 0; i < myRef.current.children.length; i++) {
+            for (let n = i; n < myRef.current.children.length; n++) {
+                if (+myRef.current.children[i].getAttribute('data-price') < +myRef.current.children[n].getAttribute('data-price')) {
+                    let replaceNode = myRef.current.replaceChild(myRef.current.children[n], myRef.current.children[i]);
+                    insertAfter(replaceNode, myRef.current.children[i]);
                 }
             }
         }
     } 
 
-    sortByName = () => {
-        for (let i = 0; i < this.myRef.current.children.length; i++) {
-            for (let n = i; n < this.myRef.current.children.length; n++) {
-                if (this.myRef.current.children[i].getAttribute('data-name') > this.myRef.current.children[n].getAttribute('data-name')) {
-                    let replaceNode = this.myRef.current.replaceChild(this.myRef.current.children[n], this.myRef.current.children[i]);
-                    this.insertAfter(replaceNode, this.myRef.current.children[i]);
+    const sortByName = () => {
+        for (let i = 0; i < myRef.current.children.length; i++) {
+            for (let n = i; n < myRef.current.children.length; n++) {
+                if (myRef.current.children[i].getAttribute('data-name') > myRef.current.children[n].getAttribute('data-name')) {
+                    let replaceNode = myRef.current.replaceChild(myRef.current.children[n], myRef.current.children[i]);
+                    insertAfter(replaceNode, myRef.current.children[i]);
                 }
             }
         }
     }
 
-    render() {
-
-        return (
-            <ProductList sortByName={this.sortByName} 
-                sortToLow={this.sortToLow} 
-                sortToHigh={this.sortToHigh} myRef={this.myRef} 
-                nft={this.props.nft} 
-                isFetching={this.props.isFetching}
-            />
-        )
-    }
+    return (
+        <ProductList sortByName={sortByName} 
+            sortToLow={sortToLow} 
+            sortToHigh={sortToHigh} myRef={myRef} 
+            nft={props.nft} 
+            isFetching={props.isFetching}
+            openModalWindow={openModalWindow}
+        />
+    )
+    
 }
 
 const mapStateToProps = (state) => {
     return {
         nft: state.productPage.nft,
-        isFetching: state.productPage.isFetching
+        isFetching: state.productPage.isFetching,
+        isModalWindow: state.productPage.isModalWindow
     }
 }
 
-export default connect(mapStateToProps, { setNftDataThunk })(ProductListContainer);
+export let finalId;
+
+export default connect(mapStateToProps, { setNftDataThunk, toggleModalWindow })(ProductListContainer);

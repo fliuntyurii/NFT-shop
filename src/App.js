@@ -3,6 +3,7 @@ import style from "./App.module.css"
 import HomepageContainer from "./components/Homepage/HomepageContainer";
 import ProductListContainer from "./components/ProductList/ProductListContainer";
 import Contacts from "./components/Contacts/Contacts";
+import ProductPageContainer from "./components/ProductPage/ProductPageContainer";
 
 function App(props) {
   return (
@@ -11,6 +12,7 @@ function App(props) {
       <HomepageContainer />
       <ProductListContainer />
       <Contacts />
+      <ProductPageContainer />
     </div>
   );
 }

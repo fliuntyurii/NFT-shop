@@ -26,7 +26,7 @@ const ProductList = (props) => {
                         <p>Amount: {nft.amount}</p>
                         <p>Price: {nft.price}$</p>
                         <div className={style.button}>
-                            <button>Info</button>
+                            <button id={nft.id} onClick={props.openModalWindow}>Info</button>
                             <button>Buy</button>
                         </div>
                     </div> )
