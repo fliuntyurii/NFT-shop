@@ -1,7 +1,7 @@
 import ProductPage from "./ProductPage"
 import { connect } from 'react-redux';
 import { useState } from "react";
-import { toggleModalWindow } from "../../redux/productPageReducer.tsx";
+import { toggleModalWindow, baseUrl } from "../../redux/productPageReducer.tsx";
 import { setNftData, setNftDataThunk } from "../../redux/productPageReducer.tsx";
 
 const ProductPageContainer = (props) => {
@@ -10,16 +10,23 @@ const ProductPageContainer = (props) => {
 
     const closeModalWindow = () => {
         props.isModalWindow ? props.toggleModalWindow(false) : props.toggleModalWindow(true);
+        confirmDelete && setconfirmDelete(false)
+    }
+
+    const confirmWindow = () => {
+        confirmDelete ? setconfirmDelete(false) : setconfirmDelete(true);
     }
     
     const deleteNft = (ev) => {
         const id = ev.target.getAttribute('id');
         
-        fetch('https://my-json-server.typicode.com/fliuntyurii/NFT-shop/Products/' + id, { 
+        fetch(`${baseUrl}${id}`, { 
             method: 'DELETE'
         })
         .then(response => response.json())
         .then(data => data);
+        confirmDelete ? setconfirmDelete(false) : setconfirmDelete(true);
+        props.setNftDataThunk();
         
         props.toggleModalWindow(false);     
     }
@@ -31,6 +38,8 @@ const ProductPageContainer = (props) => {
                     deleteNft={deleteNft}
                     nft={props.nft} 
                     closeModalWindow={closeModalWindow} 
+                    confirmWindow={confirmWindow}
+                    confirmDelete={confirmDelete}
                 /> : 
             null}
         </div>

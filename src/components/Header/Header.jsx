@@ -8,7 +8,6 @@ const Header = (props) => {
                 <a href="#home">Home</a>
                 <a href="#products">Products</a>
                 <a href="#contacts">Contacts</a>
-                <a className={style.cart} href="">Cart</a>
             </div>
         </div>
     )

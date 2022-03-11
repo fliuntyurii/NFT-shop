@@ -1,4 +1,4 @@
-const baseUrl = 'https://my-json-server.typicode.com/fliuntyurii/NFT-shop/Products'
+export const baseUrl = 'https://my-json-server.typicode.com/fliuntyurii/NFT-shop/Products/'
 
 type stateCreator = {
     nft: nftCreator | []
@@ -11,7 +11,7 @@ export type nftCreator = {
     imageUrl: string
     name: string
     amount: number
-    size: {} | null
+    size: {}
     price: number
     comments: []
 }

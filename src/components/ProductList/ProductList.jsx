@@ -20,7 +20,7 @@ const ProductList = (props) => {
             <div className={style.nftPage} ref={props.myRef}>                
                 {
                     props.nft.map(nft => 
-                    <div key={nft.id} data-name={nft.name} data-price={nft.price} className={style.nftBlock}>
+                    <div key={nft.name} data-name={nft.name} data-price={nft.price} className={style.nftBlock}>
                         <img src={nft.imageUrl} className={style.nftImage} />
                         <h3>{nft.name}</h3>
                         <p>Amount: {nft.amount}</p>

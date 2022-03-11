@@ -12,6 +12,10 @@
     font-weight: bold;
 }
 
+.navigation {
+    margin-right: 15px;
+}
+
 .navigation a {
     margin: auto 10px;
     text-decoration: none;

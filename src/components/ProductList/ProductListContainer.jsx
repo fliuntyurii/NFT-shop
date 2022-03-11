@@ -1,22 +1,20 @@
 import ProductList from "./ProductList";
 import { connect } from 'react-redux';
 import { setNftDataThunk, toggleModalWindow } from '../../redux/productPageReducer.tsx';
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 const ProductListContainer = (props) => {
-
     const myRef = useRef();
 
     useEffect(() => {
         props.setNftDataThunk();
-    }, [])
+    }, [props.nft.length])
 
     const openModalWindow = (ev) => {
         props.isModalWindow ? props.toggleModalWindow(false) : props.toggleModalWindow(true);
         const getId = ev.target;
         return finalId = getId.getAttribute('id');
     }
-
 
     const insertAfter = (elem, refElem) => {
         return myRef.current.insertBefore(elem, refElem.nextSibling)
@@ -54,7 +52,6 @@ const ProductListContainer = (props) => {
             }
         }
     }
-
     return (
         <ProductList sortByName={sortByName} 
             sortToLow={sortToLow} 
@@ -64,7 +61,6 @@ const ProductListContainer = (props) => {
             openModalWindow={openModalWindow}
         />
     )
-    
 }
 
 const mapStateToProps = (state) => {
